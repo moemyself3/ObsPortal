@@ -1,0 +1,36 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'devices/navbar.html'%}   
+{% include 'devices/messages.html' %}
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1>Devices</h1>
+    <div class="mx-auto border rounded" style="width:75%">
+    {% if device_list %}
+            
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"> Device Name </th>
+                    <th class="text-end" scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+    {% for device in device_list.all %}
+            <tr>
+                <td>
+                    <a class="text-reset" href="{% url 'devices:device-detail' pk=device.pk %}">{{ device.devicename }}</a>
+                </td>
+                <td class="text-end">
+                    <a class="btn btn-secondary" href="{% url 'devices:update-device' pk=device.pk %}">Update</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+{% else %}
+    <p>No devices registered.</p>
+{% endif %}
+    </div>
+</div>
+{% endblock %}

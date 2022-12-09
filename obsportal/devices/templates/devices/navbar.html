@@ -1,0 +1,48 @@
+{% load static %}
+<header>
+    <div class="px-3 py-1 bg-secondary text-white">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="." class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" fill="currentColor" role="img" aria-label="Moon stars"><use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#boxes"></use></svg>
+        <span class="fs-4">Site & Devices</span>
+          </a>
+
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li class="nav-item">
+                <a href="{% url 'devices:sites' %}" class="nav-link text-white">
+                  <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#geo-alt"></use></svg>
+                Sites
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'devices:add-site' %}" class="nav-link text-white">
+                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
+                        <use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#plus-circle"></use>
+                    </svg>
+                    Add Site
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'devices:index' %}" class="nav-link text-white">
+                <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#boxes"></use></svg>
+                Devices
+              </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'devices:add-device' %}" class="nav-link text-white">
+                <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#plus-square"></use></svg>
+                Add Device
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'devices:alpaca-discovery' %}" class="nav-link text-white">
+                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
+                        <use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#binoculars"></use> </svg> Alpaca Discovery 
+                </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</header>

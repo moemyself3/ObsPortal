@@ -1,0 +1,17 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'devices/navbar.html' %}   
+{% include 'devices/messages.html' %}
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1>Update Site</h1>
+    <h3>Modifying {{ site.name }}</h3>    
+    <form method="post">
+        {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button type="submit" class="btn btn-primary">Update site</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'devices/navbar.html' %}   
+{% include 'devices/messages.html' %}
+
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <div class="container"> 
+    <form method="post" onsubmit="discoverButton.disabled = true; discoverButtonSpinner.classList.remove('visually-hidden'); return true;">{% csrf_token %}
+        <div class="containter"><h1>Alpaca Device Discovery</h1></div>
+        <p>Find devices within the local network using Alpaca Discovery Protocols by clicking
+        Discover Devices. Leave the field blank to use
+        the default Discovery Port.
+        You can search a specific Discovery Port by filling the
+        appropriate field.</p>
+        <div class="container">{{ form.as_p }}</div>
+        <button type="submit" class="btn btn-primary m-3" name="discoverButton">
+            <span class="spinner-border spinner-border-sm visually-hidden" id="discoverButtonSpinner" role="status" aria-hidden="true"></span>
+            Discover Devices
+        </button>
+    </form>
+</div>
+<div class="container">
+{% if devices %}
+    <div class="mt-3 mb-3">
+        <h1>{{ devices|length }} DEVICES FOUND!</h1>
+        <p>
+        You can register devices to control them. Select Add then Register Device(s) button. 
+        Confirm information on the next page.
+        </p>
+    </div>
+    <form action="{% url 'devices:alpaca-transfer' %}" method="post" class="row row-cols-lg-auto g-3 align-items-center" onsubmit="registerDevicesButton.disabled = true; registerDevicesButtonSpinner.classList.remove('visually-hidden'); return true;" id="transfer_form">{% csrf_token %}
+        <div class="col-12">
+        <button type="submit" class="btn btn-secondary" name="registerDevicesButton">
+            <span class="spinner-border spinner-border-sm visually-hidden" id="registerDevicesButtonSpinner" role="status" aria-hidden="true"></span>
+            Register Device(s)
+        </button>
+        </div>
+        <div class="col-12">
+            <select class="form-select" aria-label="Select site to register devices." name="site" required>
+                <option selected disabled value="">Select site to register devices</option>
+                {% for site in sites %}
+                    <option value="{{ site.pk }}">{{ site }}</option>
+                {% endfor %}
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid state.
+            </div>
+       </div>
+
+    <div class="p-3 table-responsive border rounded">
+        <table class="mt-3 table table-striped table-hover table-reactive">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">Add?</th>
+                    <th scope="col">Device Name</th>
+                    <th scope="col">Device Type</th>
+                    <th scope="col">Device Number</th>
+                    <th scope="col">Unique ID</th>
+                    <th scope="col">Server Address</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for device in devices %}
+                <tr> 
+                    <td>
+                        <input type=checkbox value="{{ device }}" name="selected" class="form-check-input" aria-label="Checkbox to select {{ device.DeviceName }}">
+                    </td>
+                    <td>{{ device.DeviceName }}</td>
+                    <td>{{ device.DeviceType }}</td>
+                    <td>{{ device.DeviceNumber }}</td>
+                    <td>{{ device.UniqueID }}</td>
+                    <td>{{ device.ServerAddress }}</td>
+                </tr>    
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </form>
+{% else %}
+    <div class="container"> 
+    no devices found....
+    </div>
+{% endif %}
+</div>
+
+</div>
+{% endblock %}

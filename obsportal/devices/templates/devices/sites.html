@@ -1,0 +1,33 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'devices/navbar.html'%}    
+{% include 'devices/messages.html' %}
+
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1>Sites</h1>
+    <div class="mx-auto border rounded" style="width:75%">
+{% if site_list %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Site Name</th>
+                <th class="text-end" scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for site in site_list.all %}
+            <tr>
+                <td><a class="text-reset" href="{% url 'devices:site-detail' pk=site.pk %}">{{ site.name }}</a></td>
+                <td class="text-end" ><a class="btn btn-secondary" href="{% url 'devices:update-site' pk=site.pk %}">Update</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <p>Please register a site before adding devices.</p>
+{% endif %}
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'devices/navbar.html' %}   
+{% include 'devices/messages.html' %}
+
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1> {{ site.name }}</h1>
+    <h2> Site Details </h2>
+    <div class="btn-group" role="group" aria-label="Site options">
+        <a class="btn btn-primary" href="{% url 'devices:update-site' pk=site.pk %}">Update</a>
+        <a class="btn btn-danger"  href="{% url 'devices:delete-site' pk=site.pk %}">Delete Site</a>   
+    </div> 
+    <table class="table table-sm">
+        <tr>
+            <td>Geolat in dec degrees </td>
+            <td> {{ site.geolat }} </td>
+        </tr>
+        <tr>
+            <td>Geolong in dec degrees </td>
+            <td> {{ site.geolong }} </td>
+        </tr>
+        <tr>
+            <td>Elevation (m) </td>
+            <td> {{ site.elevation }} </td>
+        </tr>
+    </table>
+    <hr>
+    <h2> Device Information </h2>
+    <a class="btn btn-primary" href="{% url 'devices:update-site-devices' pk=site.pk %}">Update Devices</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Device Name</th>
+                <th scope="col">Device Type</th>
+                <th scope="col">Device Number</th>
+                <th scope="col">Server Address</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        {% for device in site.device_site.all %}
+            <tr>
+                <td> {{ device.pk }} </td>
+                <td> {{ device.devicename }} </td>
+                <td> {{ device.devicetype }} </td>
+                <td> {{ device.devicenumber }} </td>
+                <td> {{ device.ip_address }} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

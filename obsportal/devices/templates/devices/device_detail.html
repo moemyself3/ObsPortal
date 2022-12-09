@@ -1,0 +1,34 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'devices/navbar.html' %}   
+{% include 'devices/messages.html' %}
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1> {{ device.name }}</h1>
+    <h2> Device Details </h2>
+    <div class="btn-group" role="group" aria-label="Device options">
+        <a class="btn btn-primary" href="{% url 'devices:update-device' pk=device.pk %}">Update</a>
+        <a class="btn btn-danger"  href="{% url 'devices:delete-device' pk=device.pk %}">Delete Device</a>   
+    </div> 
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Device Name</th>
+                <th scope="col">Device Type</th>
+                <th scope="col">Device Number</th>
+                <th scope="col">Server Address</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td> {{ device.pk }} </td>
+                <td> {{ device.devicename }} </td>
+                <td> {{ device.devicetype }} </td>
+                <td> {{ device.devicenumber }} </td>
+                <td> {{ device.ip_address }} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

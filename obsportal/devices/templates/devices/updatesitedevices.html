@@ -1,0 +1,50 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'devices/navbar.html'%}    
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1>Update Site Devices</h1>
+    <p>Add or verify information looks correct then click on Register Device(s) button.</p>
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.management_form }}
+        {{ form.non_form_errors }}
+        <button type="submit" class="btn btn-primary m-3" name="addDeviceButton">Update Site Device(s)</button>
+        {% for device_form in form.forms %}
+            <hr>
+            <h5>
+                {% if device_form.instance.id %}
+                    Device: {{ device_form.instance.devicename }}
+                {% else %}
+                    {% if form.forms|length > 1 %}
+                        Add another device
+                    {% else %}
+                        Add a device
+                    {% endif %}
+                {% endif %}
+            </h5>
+            {% for hidden_field in device_form.hidden_fields %}
+                {{ hidden_field.errors }}
+            {% endfor %}
+            <table>
+                {{ device_form.as_table }}
+            </table>
+        {% endfor %}
+    </form>
+</div>
+
+{% if selected %}
+    selected!!
+    <ul>
+    {% for item in selected %}
+        <li>{{ item }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% if test %}
+    test!!
+    {{ test }}
+{% endif %}
+
+{% endblock %}

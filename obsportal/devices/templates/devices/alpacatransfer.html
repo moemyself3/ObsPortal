@@ -1,0 +1,27 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'devices/navbar.html' %}   
+{% include 'devices/messages.html' %}
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1>Alpaca Transfer</h1>
+    <div class="form-group">    
+    <form method="post" action="registration/">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {{ formset.non_form_errors }}
+
+        {% for form in formset %}
+            <hr>
+            <h5> {{ form.instance.devicename }} </h5>
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field.errors }}
+            {% endfor %}
+
+            {{ form.as_table }}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Add Device</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'devices/navbar.html' %}   
+{% include 'devices/messages.html' %}
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1>Delete Device</h1> 
+    <h3>Delete {{ device.devicename }}</h3>    
+    <div class="form-group">
+        <form method="post">
+            {% csrf_token %}
+        <div class="alert alert-warning">
+            <strong>Are you sure?</strong>
+        </div>
+        <div class="btn-group" role="group" aria-label="Option buttons"> 
+            <button type="submit" class="btn btn-danger">Delete device</button>
+            <a class="btn btn-primary" href="{% url 'devices:device-detail' pk=device.pk %}">Back to Saftey</a>
+        </div>
+        </form>
+</div>
+{% endblock %}
