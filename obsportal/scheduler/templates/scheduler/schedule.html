@@ -1,0 +1,17 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'scheduler/navbar.html'%}    
+{% include 'scheduler/messages.html' %}
+
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    
+    <h1> Schedule </h1>
+    <center>{{ calendar|safe }}</center>
+
+    <div class="mx-auto border rounded" style="width:75%">
+        
+
+    </div>
+</div>
+{% endblock %}

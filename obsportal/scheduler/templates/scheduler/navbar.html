@@ -1,0 +1,30 @@
+{% load static %}
+<header>
+    <div class="px-3 py-1 bg-secondary text-white">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="." class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" fill="currentColor" role="img" aria-label="Moon stars"><use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#calendar2-range"></use></svg>
+        <span class="fs-4">Scheduler</span>
+          </a>
+
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li class="nav-item">
+                <a href="#url'scheduler:add-event'" class="nav-link text-white">
+                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
+                        <use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#calendar-plus"></use>
+                    </svg>
+                    Add Event
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#url'scheduler:search-event'" class="nav-link text-white">
+                <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#search"></use></svg>
+                Event Lookup
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</header>
