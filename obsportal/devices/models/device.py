@@ -20,6 +20,9 @@ class Device(models.Model):
     driverversion = models.CharField(max_length=255)
     interfaceversion = models.IntegerField()
     supportedactions = models.JSONField()
+    
+    def __str__(self):
+        return self.devicename 
 
     def get_absolute_url(self):
         return reverse('devices:device-detail', kwargs={'pk':self.pk})
