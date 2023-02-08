@@ -1,5 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic.edit import CreateView
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+
+from .forms import AddEventForm
 
 import calendar
 
@@ -19,5 +24,10 @@ def CalendarView(request):
     month = now.month
 
     calendar = HTMLCalendar().formatmonth(year, month)
-    calendar = calendar.replace('<td ', '<td  width="150" height="150"')
+    calendar = calendar.replace('<td ', '<td  width="50" height="50"')
     return render(request, 'scheduler/schedule.html', {'calendar': calendar})
+
+class EventCreateView(SuccessMessageMixin, CreateView):
+    template_name= 'scheduler/addevent.html'
+    form_class = AddEventForm
+    success_message = "%(name)s was created successfully"

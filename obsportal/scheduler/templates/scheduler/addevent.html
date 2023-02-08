@@ -1,0 +1,18 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'scheduler/navbar.html' %}   
+{% include 'scheduler/messages.html' %}
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1>Add Event</h1>
+    <div class="form-group">   
+        <form method="post">
+            {% csrf_token %}
+        <table>
+            {{ form.as_p }}
+        </table>
+        <button type="submit" class="btn btn-primary">Add event</button>
+        </form>
+    </div>    
+</div>
+{% endblock %}
