@@ -6,6 +6,6 @@ from . import views
 app_name = 'scheduler'
 
 urlpatterns = [
-    path('', views.CalendarView, name='index'),
+    path('', views.EventListView.as_view(), name='index'),
     path('add/', views.EventCreateView.as_view(), name='add-event'),
 ]

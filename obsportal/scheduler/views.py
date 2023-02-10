@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
 from .forms import AddEventForm
+from .models import Event
 
 import calendar
 
@@ -12,10 +13,10 @@ from calendar import HTMLCalendar
 from datetime import datetime
 
 # Schedule views
-#class ScheduleListView(ListView):
-#    model = Schedule
-#    template_name = 'scheduler/schedule.html'
-#    context_object_name = 'schedule_list'
+class EventListView(ListView):
+    model = Event
+    template_name = 'scheduler/schedule.html'
+    context_object_name = 'schedule_list'
 
 def CalendarView(request):
     #get current datetime
