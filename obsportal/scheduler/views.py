@@ -26,7 +26,14 @@ class EventListView(ListView):
         day = now.day
     
         calendar = HTMLCalendar().formatmonth(year, month)
-        calendar = calendar.replace('<td ', '<td  width="50" height="50"')
+        calendar = calendar.replace(
+                '<table ', '<table class="table table-striped table-hover" '
+                )
+
+        calendar = calendar.replace(
+                '<td ', '<td  width="50" height="50"'
+                )
+
         calendar = calendar.replace(
                 '>'+str(day)+'<',
                 'style="background-color:#FFDD33; border:1px solid black; border-radius: 100px;">'+str(day)+'<')
