@@ -21,8 +21,14 @@
                 <p class="card-text">
                 {{ event.description }}
                 </p>
-                <a href="#" class="card-link">Edit Event</a>
-                <a href="#" class="card-link">Event details</a>
+                <div class="btn-group">
+                    <a class="btn btn-primary btn-sm" href="#" role="button">Event Details</a>
+                    <a class="btn btn-primary btn-sm" href="#" role="button">
+                    <use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#pencil"></use>
+                    </svg>
+                        Edit Event
+                    </a>
+                </div>
               </div>
             </div>
             {% endfor %}
@@ -35,8 +41,13 @@
                 <p class="card-text">
                     Add an event by clicking the Add Event button below.
                 </p>
-                <a href="#" class="card-link">Add Event</a>
-                <a href="#" class="card-link">Another link</a>
+                
+                <a class="btn btn-primary btn-sm" href="{% url 'scheduler:add-event' %}" role="button">
+                <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
+                        <use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#calendar-plus"></use>
+                    </svg>
+
+                Add Event</a>
               </div>
             </div>
             {% endif %}
