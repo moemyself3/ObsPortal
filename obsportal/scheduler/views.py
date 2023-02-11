@@ -18,15 +18,19 @@ class EventListView(ListView):
     template_name = 'scheduler/schedule.html'
     context_object_name = 'schedule_list'
 
-def CalendarView(request):
-    #get current datetime
-    now = datetime.now()
-    year = now.year
-    month = now.month
-
-    calendar = HTMLCalendar().formatmonth(year, month)
-    calendar = calendar.replace('<td ', '<td  width="50" height="50"')
-    return render(request, 'scheduler/schedule.html', {'calendar': calendar})
+    def get(self, request, *args, **kwargs):
+        #get current datetime
+        now = datetime.now()
+        year = now.year
+        month = now.month
+        day = now.day
+    
+        calendar = HTMLCalendar().formatmonth(year, month)
+        calendar = calendar.replace('<td ', '<td  width="50" height="50"')
+        calendar = calendar.replace(
+                '>'+str(day)+'<',
+                'style="background-color:#FFDD33; border:1px solid black; border-radius: 100px;">'+str(day)+'<')
+        return render(request, 'scheduler/schedule.html', {'calendar': calendar})
 
 class EventCreateView(SuccessMessageMixin, CreateView):
     template_name= 'scheduler/addevent.html'
