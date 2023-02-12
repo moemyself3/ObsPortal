@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'devices.apps.DevicesConfig',
     'pages.apps.PagesConfig',
     'scheduler.apps.SchedulerConfig',
+    'routines.apps.RoutinesConfig',
 ]
 
 MIDDLEWARE = [
