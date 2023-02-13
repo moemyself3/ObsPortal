@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.utils import timezone
 
 from .forms import AddEventForm
 from .models import Event
@@ -22,11 +23,12 @@ class EventListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         #get current datetime
-        now = datetime.now()
+        now = timezone.make_aware(datetime.now())
         year = now.year
         month = now.month
         day = now.day
-    
+   
+        # Calendar and formatting
         calendar = HTMLCalendar().formatmonth(year, month)
         calendar = calendar.replace(
                 '<table ', '<table class="table table-striped table-hover" '
