@@ -17,7 +17,7 @@
             <div class="card" style="width: 18rem;">
               <div class="card-body">
                   <h5 class="card-title">{{ event.name }}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{ event.startdate }} at {{ event.starttime }}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">{{ event.event_start_datetime }}</h6>
                 <p class="card-text">
                 {{ event.description }}
                 </p>
@@ -40,7 +40,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">Consider adding an event.</h6>
                 <p class="card-text">
                     Add an event by clicking the Add Event button below.
-                </p>
+        </p>
                 
                 <a class="btn btn-primary btn-sm" href="{% url 'scheduler:add-event' %}" role="button">
                 <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
@@ -52,5 +52,6 @@
             </div>
             {% endif %}
         </div>
-</div>
+    </div>
+
 {% endblock %}

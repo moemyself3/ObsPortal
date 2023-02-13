@@ -3,6 +3,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 
 from .forms import AddEventForm
 from .models import Event
@@ -16,9 +17,10 @@ from datetime import datetime
 class EventListView(ListView):
     model = Event
     template_name = 'scheduler/schedule.html'
-    context_object_name = 'schedule_list'
+    context_object_name = 'event_list'
 
-    def get(self, request, *args, **kwargs):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         #get current datetime
         now = datetime.now()
         year = now.year
@@ -37,9 +39,12 @@ class EventListView(ListView):
         calendar = calendar.replace(
                 '>'+str(day)+'<',
                 'style="background-color:#FFDD33; border:1px solid black; border-radius: 100px;">'+str(day)+'<')
-        return render(request, 'scheduler/schedule.html', {'calendar': calendar})
+        context['calendar'] = calendar
+        return context
+
 
 class EventCreateView(SuccessMessageMixin, CreateView):
     template_name= 'scheduler/addevent.html'
     form_class = AddEventForm
+    success_url = reverse_lazy('scheduler:index')
     success_message = "%(name)s was created successfully"
