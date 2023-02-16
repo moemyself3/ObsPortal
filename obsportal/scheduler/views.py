@@ -61,6 +61,7 @@ class EventUpdateView(SuccessMessageMixin, UpdateView):
     form_class = AddEventForm
     template_name = 'scheduler/updateevent.html'
     success_url = reverse_lazy('scheduler:index')
+    success_message = "Event was updated successfully"
 
 class EventDeleteView(SuccessMessageMixin, DeleteView):
     model = Event
