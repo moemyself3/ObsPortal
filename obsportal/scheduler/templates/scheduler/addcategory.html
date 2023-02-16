@@ -4,14 +4,14 @@
 {% include 'scheduler/navbar.html' %}   
 {% include 'scheduler/messages.html' %}
 <div class="p-4 p-md-5 mb-4 text-bg-light rounded">
-    <h1>Add Event</h1>
+    <h1>Add Category</h1>
     <div class="form-group">   
         <form method="post">
             {% csrf_token %}
         <table>
             {{ form.as_p }}
         </table>
-        <button type="submit" class="btn btn-primary">Add event</button>
+        <button type="submit" class="btn btn-primary">Add Category</button>
         <button type="reset" class="btn btn-warning">Reset</button>
         <a class="btn btn-secondary" href="{% url 'scheduler:index' %}" role="button">Cancel</a>
         </form>
