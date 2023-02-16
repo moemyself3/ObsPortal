@@ -1,0 +1,42 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'scheduler/navbar.html' %}   
+{% include 'scheduler/messages.html' %}
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1> {{ Event.name }}</h1>
+    <h2> Event Details </h2>
+    <div class="btn-group" role="group" aria-label="Event options">
+        <a class="btn btn-primary" href="{% url 'scheduler:update-event' pk=event.pk %}">Update</a>
+        <a class="btn btn-danger"  href="{% url 'scheduler:delete-event' pk=event.pk %}">Delete Event</a>   
+    </div> 
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Event Name</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Site</th>
+                <th scope="col">Routine</th>
+                <th scope="col">Manager</th>
+                <th scope="col">Description</th>
+                <th scope="category">Category</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td> {{ event.pk }} </td>
+                <td> {{ event.name }} </td>
+                <td> {{ event.event_start_datetime }} </td>
+                <td> {{ event.event_end_datetime }} </td>
+                <td> {{ event.site }} </td>
+                <td> {{ event.routine }} </td>
+                <td> {{ event.manager }} </td>
+                <td> {{ event.description }} </td>
+                <td> {{ event.category }} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

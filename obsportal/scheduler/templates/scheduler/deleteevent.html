@@ -1,0 +1,21 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'scheduler/navbar.html' %}   
+{% include 'scheduler/messages.html' %}
+<div class="p-4 p-md-5 mb-4 text-bg-light rounded">
+    <h1>Delete Event</h1> 
+    <h3>Delete {{ event.name }}</h3>    
+    <div class="form-group">
+        <form method="post">
+            {% csrf_token %}
+        <div class="alert alert-warning">
+            <strong>Are you sure?</strong>
+        </div>
+        <div class="btn-group" role="group" aria-label="Option buttons"> 
+            <button type="submit" class="btn btn-danger">Delete event</button>
+            <a class="btn btn-primary" href="{% url 'scheduler:detail-event' pk=event.pk %}">Back to Saftey</a>
+        </div>
+        </form>
+</div>
+{% endblock %}

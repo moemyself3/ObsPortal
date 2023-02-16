@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView
-from django.views.generic.edit import CreateView
+from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.db.models.functions import Now
 
 from .forms import AddEventForm
 from .models import Event
@@ -22,12 +23,13 @@ class EventListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         #get current datetime
         now = timezone.make_aware(datetime.now())
         year = now.year
         month = now.month
         day = now.day
-   
+        
         # Calendar and formatting
         calendar = HTMLCalendar().formatmonth(year, month)
         calendar = calendar.replace(
@@ -50,3 +52,19 @@ class EventCreateView(SuccessMessageMixin, CreateView):
     form_class = AddEventForm
     success_url = reverse_lazy('scheduler:index')
     success_message = "%(name)s was created successfully"
+
+class EventDetailView(DetailView):
+    model = Event
+    template_name = 'scheduler/detailevent.html'
+
+class EventUpdateView(SuccessMessageMixin, UpdateView):
+    model = Event
+    form_class = AddEventForm
+    template_name = 'scheduler/updateevent.html'
+    success_url = reverse_lazy('scheduler:index')
+
+class EventDeleteView(SuccessMessageMixin, DeleteView):
+    model = Event
+    template_name= 'scheduler/deleteevent.html'
+    success_url = reverse_lazy('scheduler:index')
+    success_message = "Event was deleted successfully"
