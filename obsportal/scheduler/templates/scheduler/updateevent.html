@@ -12,6 +12,7 @@
         {{ form.as_table }}
     </table>
     <button type="submit" class="btn btn-primary">Update Event</button>
+    <a class="btn btn-secondary" href="{% url 'scheduler:index' %}" role="button">Cancel</a>
     </form>
 </div>
 {% endblock %}

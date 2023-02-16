@@ -9,34 +9,52 @@
     <div class="btn-group" role="group" aria-label="Event options">
         <a class="btn btn-primary" href="{% url 'scheduler:update-event' pk=event.pk %}">Update</a>
         <a class="btn btn-danger"  href="{% url 'scheduler:delete-event' pk=event.pk %}">Delete Event</a>   
-    </div> 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Event Name</th>
-                <th scope="col">Start Time</th>
-                <th scope="col">End Time</th>
-                <th scope="col">Site</th>
-                <th scope="col">Routine</th>
-                <th scope="col">Manager</th>
-                <th scope="col">Description</th>
-                <th scope="category">Category</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            <tr>
-                <td> {{ event.pk }} </td>
-                <td> {{ event.name }} </td>
-                <td> {{ event.event_start_datetime }} </td>
-                <td> {{ event.event_end_datetime }} </td>
-                <td> {{ event.site }} </td>
-                <td> {{ event.routine }} </td>
-                <td> {{ event.manager }} </td>
-                <td> {{ event.description }} </td>
-                <td> {{ event.category }} </td>
-            </tr>
-        </tbody>
-    </table>
+    </div>
+    <div class="list-group">
+        <div class="list-group-item list-group-item-action">
+        <h4>ID</h4>
+        <p> {{ event.pk }} </p>
+        </div>
+        <div class="list-group-item list-group-item-action">
+        <h4>Event Name</h4>
+        <p> {{ event.name }} </p>
+         </div>
+        <div class="list-group-item list-group-item-action">
+       
+        <h4>Start Time</h4> 
+        <p> {{ event.event_start_datetime }} </p>
+          </div>
+        <div class="list-group-item list-group-item-action">
+     
+        <h4>End Time</h4>
+        <p> {{ event.event_end_datetime }} </p>
+           </div>
+        <div class="list-group-item list-group-item-action">
+     
+        <h4>Site</h4>
+        <p> {{ event.site }} </p>
+            </div>
+        <div class="list-group-item list-group-item-action">
+    
+        <h4>Routine</h4>
+        <p> {{ event.routine }} </p>
+             </div>
+        <div class="list-group-item list-group-item-action">
+   
+        <h4>Manager</h4>
+        <p> {{ event.manager }} </p>
+              </div>
+        <div class="list-group-item list-group-item-action">
+  
+        <h4>Description</h4>
+        <p> {{ event.description }} </p>
+               </div>
+        <div class="list-group-item list-group-item-action">
+ 
+        <h4>Category</h4>
+        <p> {{ event.category }} </p>
+        </div>
+
+        </div>
 </div>
 {% endblock %}
