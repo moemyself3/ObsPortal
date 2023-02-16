@@ -14,10 +14,24 @@ def defaultCategoryId():
     category_id = Category.objects.get_or_create(name='Uncategorized')[0].pk
     return category_id
 
+
 class Event(models.Model):
+    FREQUENCY_CHOICES = [
+            ('second', 'second'),
+            ('minute', 'minute'),
+            ('hour', 'hour'),
+            ('day', 'day'),
+            ('week', 'week'),
+            ('month', 'month'),
+            ('year', 'year'),
+            ]
+
     name = models.CharField('Event Name', max_length=120)
     event_start_datetime = models.DateTimeField('Start Time')
     event_end_datetime = models.DateTimeField('End Time')
+    repeat = models.BooleanField(default=False)
+    interval = models.PositiveSmallIntegerField('Interval', null=True)
+    frequency = models.CharField('Frequency', choices=FREQUENCY_CHOICES, max_length=10, null=True)
     site = models.ForeignKey('devices.Site', on_delete=models.CASCADE, blank=True, null=True)
     routine = models.ForeignKey('routines.Routine', on_delete=models.CASCADE, blank=True, null=True)
     manager = models.CharField(max_length=120, blank=True) 
