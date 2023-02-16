@@ -72,7 +72,7 @@ class EventDeleteView(SuccessMessageMixin, DeleteView):
 class CategoryCreateView(SuccessMessageMixin, CreateView):
     model = Category
     fields = ['name']
-    template_name = 'scheduler/addevent.html'
+    template_name = 'scheduler/addcategory.html'
     success_url = reverse_lazy('scheduler:index')
     success_message = "%(name)s was created successfully"
 
