@@ -5,10 +5,9 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.db.models.functions import Now
 
 from .forms import AddEventForm
-from .models import Event
+from .models import Event, Category
 
 import calendar
 
@@ -68,3 +67,11 @@ class EventDeleteView(SuccessMessageMixin, DeleteView):
     template_name= 'scheduler/deleteevent.html'
     success_url = reverse_lazy('scheduler:index')
     success_message = "Event was deleted successfully"
+
+class CategoryCreateView(SuccessMessageMixin, CreateView):
+    model = Category
+    fields = ['name']
+    template_name = 'scheduler/addevent.html'
+    success_url = reverse_lazy('scheduler:index')
+    success_message = "%(name)s was created successfully"
+
