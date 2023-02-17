@@ -8,11 +8,13 @@
     <h3>Modifying {{ event.name }}</h3>    
     <form method="post">
         {% csrf_token %}
-    <table>
+    <table class="table">
         {{ form.as_table }}
     </table>
+    <br>
     <button type="submit" class="btn btn-primary">Update Event</button>
     <a class="btn btn-secondary" href="{% url 'scheduler:index' %}" role="button">Cancel</a>
+    <a class="btn btn-danger"  href="{% url 'scheduler:delete-event' pk=event.pk %}">Delete Event</a>  
     </form>
 </div>
 {% endblock %}
