@@ -7,7 +7,7 @@
 <div class="p-4 p-md-5 mb-4 text-bg-light rounded">
     
     <h1> Event Lookup </h1>
-    <div class="row">
+    <div class="row mb-2">
         <form action="{% url 'scheduler:event-lookup' %}" method="get">
             <input name="date" type="date">
             <button type="submit" class="btn btn-secondary">
@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col mx-auto border rounded" style="width:75%">
             {% if event_list %}
-             <table class="table caption-top">
+             <table class="table caption-top table-striped table-hover">
                 <caption>Events for {{ today }}</caption>
                 <thead>
                     <th scope="col">Event ID</th>
