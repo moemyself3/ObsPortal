@@ -41,7 +41,7 @@ class EventListView(ListView):
 
         calendar = calendar.replace(
                 '>'+str(day)+'<',
-                'style="background-color:#FFDD33; border:1px solid black; border-radius: 100px;">'+str(day)+'<')
+                'style="background-color:#FFDD33;">'+str(day)+'<')
         context['calendar'] = calendar
         return context
 
@@ -68,6 +68,28 @@ class EventDeleteView(SuccessMessageMixin, DeleteView):
     template_name= 'scheduler/deleteevent.html'
     success_url = reverse_lazy('scheduler:index')
     success_message = "Event was deleted successfully"
+
+class EventLookupView(ListView):
+    model = Event
+    template_name = 'scheduler/eventlookup.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        #get current datetime
+        now = timezone.make_aware(datetime.now())
+        year = now.year
+        month = now.month
+        day = now.day
+
+        ## Queryset of events
+        event_list = Event.objects.filter(
+                event_start_datetime__year = year,
+                event_start_datetime__month = month
+                )
+        context['event_list'] = event_list
+        context['today'] = now
+        return context 
 
 class CategoryCreateView(SuccessMessageMixin, CreateView):
     model = Category
