@@ -36,7 +36,7 @@ class EventListView(ListView):
                 )
 
         current_calendar = current_calendar.replace(
-                '<td ', '<td  width="50" height="50"'
+                '<td ', '<td width="50" height="50"'
                 )
 
         current_calendar = current_calendar.replace(
@@ -51,7 +51,7 @@ class EventListView(ListView):
                         '><a href=' + reverse_lazy('scheduler:event-lookup') +
                         '?date='+ str(calendar_date) +
                         ' class="btn btn-light w-100" role="button" '
-                        'data-bs-toggle="tooltip" data-bs-title="Default tooltip"'
+                        ' data-bs-toggle="tooltip" data-bs-title="Default tooltip"'
                         ' >'+ str(day) + '</a><'
                         )
         context['calendar'] = current_calendar
