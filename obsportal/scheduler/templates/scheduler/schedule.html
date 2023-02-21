@@ -4,6 +4,11 @@
 {% include 'scheduler/navbar.html'%}    
 {% include 'scheduler/messages.html' %}
 
+<script>
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+
 <div class="p-4 p-md-5 mb-4 text-bg-light rounded">
     
     <h1> Schedule </h1>
