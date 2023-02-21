@@ -1,7 +1,21 @@
 {% extends 'pages/base.html' %}
+{% load static %}
 
 {% block content %}
-    <div class="container-fluid">
-        <h1>Welcome Home!</h1>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Observation Portal</h1>
+        <p class="col-md-8 fs-4">
+        ObsPortal is a self contained observatory control and management system. 
+        The client is a web-based UI using Django. 
+        The control system implements <a href="https://github.com/ASCOMInitiative/alpyca">ASCOMInitiative/alpyca</a> a Python client
+        for <a href="https://ascom-standards.org/Developer/Alpaca.htm">ASCOM Alpaca API</a>.
+        </p>
+        <p>
+        Check this project out on GitHub <a href="https://github.com/moemyself3/ObsPortal" class="btn btn-warning">
+        <svg class="bi me-2" width="40" height="32" fill="currentColor" role="img" aria-label="Github logo"><use xlink:href="{% static 'bootstrap-icons-1.8.3/bootstrap-icons.svg' %}#github"></use></svg>
+        moemyself3/ObsPortal</a>
+        </p>
+        </div>
     </div>
 {% endblock %}
