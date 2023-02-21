@@ -75,21 +75,31 @@ class EventLookupView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if self.request.GET.get('date') is not None:
+            context['search_date'] = self.request.GET.get('date')
+        else:
+            #get current datetime
+            now = timezone.make_aware(datetime.now())
+            year = now.year
+            month = now.month
+            day = now.day
+    
+            event_list = Event.objects.filter(
+                    event_start_datetime__year = year,
+                    event_start_datetime__month = month
+                    )
+    
+            context['event_list'] = event_list
+            context['search_date'] = now.strftime('%B %Y')
+        return context
 
-        #get current datetime
-        now = timezone.make_aware(datetime.now())
-        year = now.year
-        month = now.month
-        day = now.day
-
-        ## Queryset of events
+    def get_queryset(self):
+        query = self.request.GET.get('date')
         event_list = Event.objects.filter(
-                event_start_datetime__year = year,
-                event_start_datetime__month = month
+                event_start_datetime__date = query
                 )
-        context['event_list'] = event_list
-        context['today'] = now
-        return context 
+        return event_list
+
 
 class CategoryCreateView(SuccessMessageMixin, CreateView):
     model = Category
