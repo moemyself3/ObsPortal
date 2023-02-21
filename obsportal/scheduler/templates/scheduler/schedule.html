@@ -25,7 +25,7 @@
                 </span>
  
                 <p class="card-text">
-                {{ event.description }}
+                {{ event.description|truncatechars:50 }}
                 </p>
                 <div class="btn-group">
                     <a class="btn btn-primary btn-sm" href="{% url 'scheduler:detail-event' pk=event.pk %}" role="button">Event Details</a>
