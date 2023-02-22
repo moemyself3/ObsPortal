@@ -24,8 +24,10 @@
         <div class="col mx-auto border rounded" style="width:75%">
             {% if event_list %}
             {% for event in event_list.all %}
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
+            <div class="card">
+            <div class="row g-0 align-items-center">
+            <div class="col-8">
+                <div class="card-body">
                   <h5 class="card-title">{{ event.name }}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">
                       {{ event.event_start_datetime }}
@@ -41,19 +43,26 @@
                 <p class="card-text">
                 {{ event.description|truncatechars:50 }}
                 </p>
-                <div class="btn-group">
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card-body align-middle">
+                <div class="d-grid gap-2">
                     <a class="btn btn-primary btn-sm" href="{% url 'scheduler:detail-event' pk=event.pk %}" role="button">Event Details</a>
                     <a class="btn btn-secondary btn-sm" href="{% url 'scheduler:update-event' pk=event.pk %}" role="button">
                         <svg class="bi d-inline mx-auto mb-1" width="15" height="15" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#pencil"></use></svg>
                         Edit Event
                     </a>
                 </div>
-              </div>
+                </div>
+            </div>
+            </div>
             </div>
             {% endfor %}
             {% else %}
         
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <div class="card-body">
                 <h5 class="card-title">No Events Scheduled</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Consider adding an event.</h6>
@@ -67,10 +76,10 @@
                     </svg>
 
                 Add Event</a>
-              </div>
+                </div>
             </div>
             {% endif %}
         </div>
     </div>
-
+</div>
 {% endblock %}
