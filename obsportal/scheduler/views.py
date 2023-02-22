@@ -42,7 +42,7 @@ class EventListView(ListView):
         current_calendar = current_calendar.replace(
                 '>'+str(current_day)+'<',
                 'style="background-color:#FFDD33;">'+str(current_day)+'<')
-
+        events = 0
         for day in calendar.Calendar().itermonthdays(year=current_year, month=current_month):
             if day != 0:
                 calendar_date = date(year=current_year, month=current_month, day=day)
@@ -50,9 +50,13 @@ class EventListView(ListView):
                         '>' + str(day) + '<',
                         '><a href=' + reverse_lazy('scheduler:event-lookup') +
                         '?date='+ str(calendar_date) +
-                        ' class="btn btn-light w-100" role="button" '
+                        ' class="btn btn-light w-100 position-relative"'
+                        ' role="button" '
                         ' data-bs-toggle="tooltip" data-bs-title="Default tooltip"'
-                        ' >'+ str(day) + '</a><'
+                        ' >'+ str(day) + 
+                        ' <span class="position-absolute top-0 start-100' 
+                        ' translate-middle badge rounded-pill bg-danger">' +
+                        str(events) + '</span> </a><'
                         )
         context['calendar'] = current_calendar
         return context
