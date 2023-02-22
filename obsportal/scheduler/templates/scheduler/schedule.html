@@ -10,16 +10,6 @@
     <div class="row">
         <div class="col">
             {{ calendar|safe }}
-            <script>
-                function enableAllTooltips()
-                {
-                    let tooltipelements = 
-                        document.querySelectorAll("[data-bs-toggle='tooltip']");
-                    tooltipelements.forEach((el) => {
-                        new bootstrap.Tooltip(el);
-                    });
-                }
-            </script>
         </div>
         <div class="col mx-auto border rounded" style="width:75%">
             {% if event_list %}
@@ -82,4 +72,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
