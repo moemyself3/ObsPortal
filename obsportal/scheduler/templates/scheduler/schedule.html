@@ -33,7 +33,11 @@
                 <span class="badge rounded-pill text-bg-success">
                     {{ event.category }}
                 </span>
- 
+                {% if event.repeat %}
+                <span class="badge rounded-pill text-bg-warning">
+                    Recurring
+                </span>
+                {% endif %}
                 <p class="card-text">
                 {{ event.description|truncatechars:50 }}
                 </p>
