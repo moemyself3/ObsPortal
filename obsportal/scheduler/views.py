@@ -32,7 +32,7 @@ class EventListView(ListView):
         # Calendar and formatting
         current_calendar = calendar.HTMLCalendar().formatmonth(current_year, current_month)
         current_calendar = current_calendar.replace(
-                '<table ', '<table class="table table-striped table-hover" '
+                '<table ', '<table class="table table-striped table-hover table-sm" '
                 )
 
         current_calendar = current_calendar.replace(
