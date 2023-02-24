@@ -1,39 +1,42 @@
 {% load static %}
 <header>
-    <div class="px-3 py-2 bg-dark text-white">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+    <nav class="navbar navbar-expand-lg px-3 py-2 bg-dark navbar-dark" data-bs-theme="dark">
+      <div class="container-fluid">
+        <div class="d-flex flex-wrap align-items-center flex-grow-1 justify-content-between">
+        <a href="/" class="navbar-brand d-flex align-items-center my-2 my-lg-0 text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32" fill="currentColor" role="img" aria-label="Moon stars"><use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#moon-stars"></use></svg>
         <span class="fs-4">Observation Portal</span>
-          </a>
-
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav d-flex flex-row flex-wrap col-12 col-lg-auto my-2 justify-content-evenly align-items-center my-md-0 text-small">
+            <li class="nav-item">
               <a href="/" class="nav-link text-white">
                   <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#house"></use></svg>
                 Home
               </a>
             </li>
-            <li>
+            <li class="nav-item">
               <a href="#" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#speedometer2"></use></svg>
                 Dashboard
               </a>
             </li>
-            <li>
+            <li class="nav-item">
               <a href="#controllers" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#joystick"></use></svg>
                 Controllers
               </a>
             </li>
-            <li>
+            <li class="nav-item">
                 <a href="/devices" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#boxes"></use></svg>
                 Site & Devices
               </a>
             </li>
-            <li>
+            <li class="nav-item">
                 <a href="/scheduler" class="nav-link text-white">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor">
                         <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#calendar2-range">
@@ -41,7 +44,7 @@
                 Scheduler
                 </a>
             </li>
-            <li>
+            <li class="nav-item">
                 <a href="#routines" class="nav-link text-white">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor">
                         <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#arrow-repeat"></use></svg>
@@ -50,9 +53,10 @@
             </li>
 
           </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
     <!--
     <div class="px-3 py-2 border-bottom mb-3">
       <div class="container d-flex flex-wrap justify-content-center">
