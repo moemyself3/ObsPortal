@@ -45,7 +45,9 @@ class EventListView(ListView):
 
         for day in calendar.Calendar().itermonthdays(year=current_year, month=current_month):
             if day != 0:
-                event_count = self.model.objects.filter(event_start_datetime__day=day).count()
+                event_count = self.model.objects.filter(
+                        event_start_datetime__day=day,
+                        event_start_datetime__month=current_month).count()
                 
                 if event_count == 0:
                     event_count = ''
