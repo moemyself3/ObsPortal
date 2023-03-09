@@ -76,6 +76,10 @@ class EventCreateView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('scheduler:index')
     success_message = "%(name)s was created successfully"
 
+    def form_valid(self, form):
+        form.recurring_event_handler()
+        return super().form_valid(form)
+
 class EventDetailView(DetailView):
     model = Event
     template_name = 'scheduler/detailevent.html'

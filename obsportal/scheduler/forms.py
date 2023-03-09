@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.admin import widgets
-
 from .models import Event 
+
+from datetime import datetime, timedelta
 
 class AddEventForm(forms.ModelForm):
     event_start_datetime = forms.SplitDateTimeField(
@@ -23,7 +24,36 @@ class AddEventForm(forms.ModelForm):
         if start_datetime >= end_datetime:
             self.errors['event_start_datetime'] = self.error_class([
                 'Start time must be before the end time.'])
-   
+
+        if self.cleaned_data.get('repeat'):
+            if not self.cleaned_data.get('interval'):
+                self.errors['interval'] = self.error_class([
+                    'An interval must be set.'])
+            if not self.cleaned_data.get('frequency'):
+                self.errors['frequency'] = self.error_class([
+                    'A frequency must be set.'])
+            if not self.cleaned_data.get('occurences'):
+                self.errors['occurences'] = self.error_class([
+                    'The number of occurences must be set.'])
+
+    def recurring_event_handler(self):
+        event_repeats = self.cleaned_data["repeat"]
+        
+        if event_repeats:
+            event_start = self.cleaned_data["event_start_datetime"]
+            event_end = self.cleaned_data["event_end_datetime"]
+            event_duration = event_end - event_start
+            
+            kwargs = {str(self.cleaned_data["frequency"]) : self.cleaned_data["interval"]}
+            
+            next_event_delta = timedelta(**kwargs)
+            
+            new_start_datetime = event_start + next_event_delta
+            new_end_datetime = new_start_datetime + event_duration
+            print(f"start   {new_start_datetime}")
+            print(f"end     {new_end_datetime}")
+        pass
+
     class Meta:
         model = Event
         fields = '__all__'

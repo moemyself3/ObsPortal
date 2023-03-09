@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib import admin
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class Category(models.Model):
     name = models.CharField('Category', max_length=50, unique=True)
@@ -17,21 +19,35 @@ def defaultCategoryId():
 
 class Event(models.Model):
     FREQUENCY_CHOICES = [
-            ('second', 'second'),
-            ('minute', 'minute'),
-            ('hour', 'hour'),
-            ('day', 'day'),
-            ('week', 'week'),
-            ('month', 'month'),
-            ('year', 'year'),
+            ('seconds', 'seconds'),
+            ('minutes', 'minutes'),
+            ('hours', 'hours'),
+            ('days', 'days'),
+            ('weeks', 'weeks'),
+            ('months', 'months'),
+            ('years', 'years'),
             ]
 
     name = models.CharField('Event Name', max_length=120)
     event_start_datetime = models.DateTimeField('Start Time')
     event_end_datetime = models.DateTimeField('End Time')
     repeat = models.BooleanField(default=False)
-    interval = models.PositiveSmallIntegerField('Interval', blank=True, null=True)
+    interval = models.PositiveSmallIntegerField(
+            'Interval (1-100)',
+            blank=True,
+            null=True,
+            validators=[MinValueValidator(1),
+                        MaxValueValidator(100)]
+            )
     frequency = models.CharField('Frequency', choices=FREQUENCY_CHOICES, max_length=10, blank=True, null=True)
+    occurences = models.PositiveSmallIntegerField(
+            'Occurences (1-100)', 
+            blank=True, 
+            null=True, 
+            validators=[MinValueValidator(1),
+                        MaxValueValidator(100)]
+            )
+
     site = models.ForeignKey('devices.Site', on_delete=models.CASCADE, blank=True, null=True)
     routine = models.ForeignKey('routines.Routine', on_delete=models.CASCADE, blank=True, null=True)
     manager = models.CharField(max_length=120, blank=True) 
