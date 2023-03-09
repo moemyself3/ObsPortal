@@ -43,16 +43,24 @@ class AddEventForm(forms.ModelForm):
             event_start = self.cleaned_data["event_start_datetime"]
             event_end = self.cleaned_data["event_end_datetime"]
             event_duration = event_end - event_start
-            
+            occurences = self.cleaned_data["occurences"]
+
             kwargs = {str(self.cleaned_data["frequency"]) : self.cleaned_data["interval"]}
             
-            next_event_delta = timedelta(**kwargs)
-            
-            new_start_datetime = event_start + next_event_delta
-            new_end_datetime = new_start_datetime + event_duration
-            print(f"start   {new_start_datetime}")
-            print(f"end     {new_end_datetime}")
-        pass
+            next_event_timedelta = timedelta(**kwargs)
+
+            new_start_datetime = event_start
+            new_end_datetime = event_end
+            print(f"duration {event_duration}")
+            print(f"start   {event_start}")
+            print(f"end     {event_end}")
+
+            for occurence in range(occurences): 
+                new_start_datetime = new_start_datetime + next_event_timedelta
+                new_end_datetime = new_start_datetime + event_duration
+                print(f"occurence {occurence}")
+                print(f"start   {new_start_datetime}")
+                print(f"end     {new_end_datetime}")
 
     class Meta:
         model = Event
