@@ -51,16 +51,19 @@ class AddEventForm(forms.ModelForm):
 
             new_start_datetime = event_start
             new_end_datetime = event_end
-            print(f"duration {event_duration}")
-            print(f"start   {event_start}")
-            print(f"end     {event_end}")
 
-            for occurence in range(occurences): 
+            event_data = dict(self.cleaned_data)
+            recurring_event_list = [Event(**event_data), ]
+
+            for occurence in range(occurences):
+                event_data = dict(event_data)
                 new_start_datetime = new_start_datetime + next_event_timedelta
                 new_end_datetime = new_start_datetime + event_duration
-                print(f"occurence {occurence}")
-                print(f"start   {new_start_datetime}")
-                print(f"end     {new_end_datetime}")
+                event_data["event_start_datetime"] = new_start_datetime
+                event_data["event_end_datetime"] = new_end_datetime
+                recurring_event_list.append(Event(**event_data))
+            
+            Event.objects.bulk_create(recurring_event_list)
 
     class Meta:
         model = Event
