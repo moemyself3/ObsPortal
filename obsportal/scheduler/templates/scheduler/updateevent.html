@@ -8,9 +8,27 @@
     <h3>Modifying {{ event.name }}</h3>    
     <form method="post">
         {% csrf_token %}
-    <table class="table">
-        {{ form.as_table }}
-    </table>
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {% if field.name == "repeat" %}
+            {% if field.value == True %}
+                {{ field.label_tag }} Repeated
+            {% else %}
+                {{ field.label_tag }} Does not repeat
+            {% endif %}
+        {% else %}
+            {% if field.name == "interval" or field.name == "frequency" or field.name == "occurences"%}
+                {{ field.label_tag }} {{field.value}}
+            {% else %}
+                {{field.label_tag }} {{field}}
+            {% endif %}
+        {% endif %}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
     <br>
     <button type="submit" class="btn btn-primary">Update Event</button>
     <a class="btn btn-secondary" href="{% url 'scheduler:index' %}" role="button">Cancel</a>
