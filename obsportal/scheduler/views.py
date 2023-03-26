@@ -18,6 +18,7 @@ from datetime import date
 class EventListView(ListView):
     model = Event
     template_name = 'scheduler/schedule.html'
+    queryset = Event.objects.order_by('event_start_datetime').filter(event_start_datetime__gt=timezone.now())
     context_object_name = 'event_list'
 
     def get_context_data(self, **kwargs):
@@ -100,7 +101,7 @@ class EventDeleteView(SuccessMessageMixin, DeleteView):
 class EventLookupView(ListView):
     model = Event
     template_name = 'scheduler/eventlookup.html'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.GET.get('date') is not None:
@@ -115,7 +116,7 @@ class EventLookupView(ListView):
             event_list = Event.objects.filter(
                     event_start_datetime__year = year,
                     event_start_datetime__month = month
-                    )
+                    ).order_by('event_start_datetime')
     
             context['event_list'] = event_list
             context['search_date'] = now.strftime('%B %Y')

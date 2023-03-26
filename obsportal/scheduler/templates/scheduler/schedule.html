@@ -12,7 +12,8 @@
             {{ calendar|safe }}
             <p><em>Last updated {% now "SHORT_DATETIME_FORMAT" %}</em></p>
         </div>
-        <div class="col mx-auto border rounded" style="width:75%">
+        <div class="col mx-auto border p-3 rounded" style="width:75%">
+            <h3 class="text-center">Upcoming Events</h3>
             {% if event_list %}
             {% for event in event_list.all %}
             <div class="card">
@@ -22,6 +23,9 @@
                   <h5 class="card-title">{{ event.name }}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">
                       {{ event.event_start_datetime }}
+                  </h6>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                      {{ event.event_start_datetime|timeuntil }}
                   </h6>
                 <span class="badge rounded-pill text-bg-success">
                     {{ event.category }}
