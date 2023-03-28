@@ -8,6 +8,7 @@ from django.utils import timezone
 
 from .forms import AddEventForm
 from .models import Event, Category
+from .tasks import send_admin_notification_mail
 
 import calendar
 

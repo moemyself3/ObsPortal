@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import ast
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", True)
+DEBUG = ast.literal_eval(os.environ.get("DEBUG", True))
+
+ADMINS = [admin.split(":") for admin in os.environ.get("ADMINS").split(",")]
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split()
 
@@ -138,3 +142,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CELERY_TIMEZONE = str(TIME_ZONE)
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND")
+
+# Email settings
+EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND")
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_USE_TLS = ast.literal_eval(os.environ.get("EMAIL_USE_TLS"))
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_USE_SSL = ast.literal_eval(os.environ.get("EMAIL_USE_SSL"))
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
