@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_celery_beat',
+    'django_celery_results',
     'devices.apps.DevicesConfig',
     'pages.apps.PagesConfig',
     'scheduler.apps.SchedulerConfig',
@@ -143,6 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CELERY_TIMEZONE = str(TIME_ZONE)
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND")
+CELERY_CACHE_BACKEND = os.environ.get("CELERY_CACHE_BACKEND")
 
 # Email settings
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND")
