@@ -40,7 +40,6 @@ class EventListView(ListView):
         current_calendar = current_calendar.replace(
                 '<td ', '<td width="50" height="50"'
                 )
-
         current_calendar = current_calendar.replace(
                 '>'+str(current_day)+'<',
                 'style="background-color:#FFDD33;">'+str(current_day)+'<')
@@ -53,7 +52,16 @@ class EventListView(ListView):
                 
                 if event_count == 0:
                     event_count = ''
-
+                    event_pill_tag = {
+                        'open':'',
+                        'close':''
+                        }
+                else:
+                    event_pill_tag = {
+                        'open': '<span class="position-absolute top-0 start-100'
+                                ' translate-middle badge rounded-pill bg-danger"> ',
+                        'close':'</span>'
+                        }
                 calendar_date = date(year=current_year, month=current_month, day=day)
                 current_calendar = current_calendar.replace(
                         '>' + str(day) + '<',
@@ -63,10 +71,8 @@ class EventListView(ListView):
                         ' role="button" '
                         ' data-bs-toggle="tooltip" data-bs-title='
                         ' "click to see events"'
-                        ' >'+ str(day) + 
-                        ' <span class="position-absolute top-0 start-100' 
-                        ' translate-middle badge rounded-pill bg-danger">' +
-                        str(event_count) + '</span> </a><'
+                        ' >'+ str(day) + event_pill_tag['open'] +
+                        str(event_count) + event_pill_tag['close'] + ' </a><'
                         )
         context['calendar'] = current_calendar
         return context
