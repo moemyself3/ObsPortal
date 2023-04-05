@@ -11,6 +11,26 @@
         <table>
             {{ form.as_p }}
         </table>
+            <p> 
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#reminderSetup" aria-expanded="false" aria-controls="reminderSetup">
+        Add reminders
+                </button>
+            </p>
+            <div class="collapse" id="reminderSetup">
+                You can set up to 3 reminders.
+        <table>
+        {{ reminders.management_form }}
+        {% for reminder in reminders %}
+            <tr>
+                {% for field in reminder %}
+                    {%if field.name != "DELETE" %}
+                        <td> {{field}} </td>
+                    {% endif %}
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
         <button type="submit" class="btn btn-primary">Add Event</button>
         <button type="reset" class="btn btn-warning">Reset</button>
         <a class="btn btn-secondary" href="{% url 'scheduler:index' %}" role="button">Cancel</a>

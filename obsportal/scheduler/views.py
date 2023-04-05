@@ -6,7 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
 
-from .forms import AddEventForm
+from .forms import AddEventForm, EventReminderFormset
 from .models import Event, Category
 from .tasks import send_admin_notification_mail
 
@@ -78,8 +78,35 @@ class EventCreateView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('scheduler:index')
     success_message = "%(name)s was created successfully"
 
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data["reminders"] = EventReminderFormset(self.request.POST)
+        else:
+            data["reminders"] = EventReminderFormset()
+        return data
+
     def form_valid(self, form):
         form.recurring_event_handler()
+        context = self.get_context_data()
+        reminders = context["reminders"]
+        self.object = form.save()
+
+        if reminders.is_valid():
+            reminders.instance = self.object
+            reminders.save()
+            # Returns the queryset of all Reminder objects related to the Event
+            reminder_set = reminders.instance.reminder_set.all()
+            
+            # set Celery task
+            for reminder in reminder_set:
+                message = f"""
+                    Event Reminder for {reminder.event}! 
+                    The event is set to start in {reminder.interval} {reminder.timeunit}
+                    """
+                
+                send_admin_notification_mail.apply_async(eta=reminder.ETA, kwargs={'message' : message })
+
         return super().form_valid(form)
 
 class EventDetailView(DetailView):
@@ -129,7 +156,6 @@ class EventLookupView(ListView):
                 event_start_datetime__date = query
                 )
         return event_list
-
 
 class CategoryCreateView(SuccessMessageMixin, CreateView):
     model = Category

@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.admin import widgets
-from .models import Event 
+from django.forms.models import inlineformset_factory
+
+from .models import Event, Reminder
 
 from datetime import datetime, timedelta
 
@@ -76,4 +78,5 @@ class AddEventForm(forms.ModelForm):
             'description': forms.CharField.widget(attrs={'class':'form-control'}),
             }
 
-
+## Formset to add multiple reminders at once.
+EventReminderFormset = inlineformset_factory(Event, Reminder, exclude=('',))
