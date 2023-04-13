@@ -21,4 +21,5 @@ urlpatterns = [
     path('devices/', include('devices.urls')),
     path('', include('pages.urls')),
     path('scheduler/', include('scheduler.urls')),
+    path('controllers/', include('controllers.urls')),
 ]

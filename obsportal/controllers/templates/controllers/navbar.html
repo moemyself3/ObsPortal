@@ -1,0 +1,75 @@
+{% load static %}
+<div class="row flex-nowrap bg-secondary text-white">
+    <div class="col-3 m-2 p-3">
+        <a href="{% url 'controllers:index' %}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" fill="currentColor" role="img" aria-label="Moon stars"><use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#joystick"></use></svg>
+        <span class="fs-4">Controllers</span>
+        </a>
+        <hr>
+        <h4>Site</h4>
+        <div class="input-group mb-3">
+            <select class="form-select" id="siteSelect">
+                <option selected>- Site -</option>
+                {% for site in sites %}
+                    <option value="{{site.pk}}">{{site}}</option>
+                {% endfor %}
+            </select>
+             <button class="btn btn-outline-light" type="button">Go</button>
+        </div>
+        <hr>
+        <h4>Devices</h4>
+        
+        <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDevices" aria-expanded="false" aria-controls="collapseDevices">
+            Show/Hide 
+        </button>
+        <div class="collapse" id="collapseDevices">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white">
+                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
+                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
+                    </svg>
+                    telescope
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white">
+                <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use></svg>
+                camera
+              </a>
+            </li>
+             <li class="nav-item">
+                <a href="#" class="nav-link text-white">
+                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
+                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
+                    </svg>
+                    filterwheel
+                </a>
+             </li>    
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white">
+                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
+                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
+                    </svg>
+                    dome
+                </a>
+            </li>  
+        <li class="nav-item">
+                <a href="#" class="nav-link text-white">
+                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
+                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
+                    </svg>
+                    power
+                </a>
+        </li>
+        <li class="nav-item">
+                <a href="#" class="nav-link text-white">
+                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
+                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
+                    </svg>
+                    Cryo Cooler
+                </a>
+            </li>   
+          </ul>
+        </div>
+    </div>
