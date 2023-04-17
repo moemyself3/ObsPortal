@@ -5,5 +5,6 @@ from . import views
 app_name = 'controllers'
 
 urlpatterns = [
-    path('', views.SiteView.as_view() , name='index'),
+    path('', views.IndexView.as_view() , name='index'),
+    path('site/<int:pk>', views.SiteDetailView.as_view(), name='site-detail'),
 ]

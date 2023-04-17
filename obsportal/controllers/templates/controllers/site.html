@@ -1,0 +1,13 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'controllers/navbar.html'%}    
+{% include 'controllers/messages.html' %}
+
+    <div class="col-8 p-4 m-4 h-50 text-bg-light rounded sticky-top"> 
+        <h1> {{site}} </h1>
+        <p>Device Controls here</p>
+    </div>
+
+</div>
+{% endblock %}

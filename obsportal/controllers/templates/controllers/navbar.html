@@ -6,15 +6,16 @@
         <span class="fs-4">Controllers</span>
         </a>
         <hr>
-        <h4>Site</h4>
-        <div class="input-group mb-3">
-            <select class="form-select" id="siteSelect">
-                <option selected>- Site -</option>
-                {% for site in sites %}
-                    <option value="{{site.pk}}">{{site}}</option>
-                {% endfor %}
-            </select>
-             <button class="btn btn-outline-light" type="button">Go</button>
+        <h4>Site {{site}}</h4>
+        <div class="dropdown">
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Site Select
+        </button>
+        <ul class="dropdown-menu">
+            {% for site in sites %}
+                <li><a class="dropdown-item" href="{% url 'controllers:site-detail' site.pk %}">{{site}}</a></li>
+            {% endfor %}
+        </ul>
         </div>
         <hr>
         <h4>Devices</h4>
@@ -23,53 +24,17 @@
             Show/Hide 
         </button>
         <div class="collapse" id="collapseDevices">
-          <ul class="nav flex-column">
-            <li class="nav-item">
+            <ul class="nav flex-column">
+                {% for device in site.device_site.all %}
+                <li class="nav-item">
                 <a href="#" class="nav-link text-white">
                     <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
                         <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
                     </svg>
-                    telescope
+                    {{ device }}
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link text-white">
-                <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use></svg>
-                camera
-              </a>
-            </li>
-             <li class="nav-item">
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
-                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
-                    </svg>
-                    filterwheel
-                </a>
-             </li>    
-            <li class="nav-item">
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
-                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
-                    </svg>
-                    dome
-                </a>
-            </li>  
-        <li class="nav-item">
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
-                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
-                    </svg>
-                    power
-                </a>
-        </li>
-        <li class="nav-item">
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
-                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
-                    </svg>
-                    Cryo Cooler
-                </a>
-            </li>   
+                {% endfor %}
           </ul>
         </div>
     </div>
