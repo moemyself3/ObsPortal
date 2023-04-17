@@ -14,7 +14,7 @@
         <ul class="dropdown-menu">
             {% for site in sites %}
                 <li><a class="dropdown-item" href="{% url 'controllers:site-detail' site.pk %}">{{site}}</a></li>
-            {% endfor %}
+                        {% endfor %}
         </ul>
         </div>
         <hr>
@@ -24,13 +24,17 @@
             Show/Hide 
         </button>
         <div class="collapse" id="collapseDevices">
-            <ul class="nav flex-column">
+            <ul class="nav flex-column nav-tabs">
                 {% for device in site.device_site.all %}
                 <li class="nav-item">
-                <a href="#" class="nav-link text-white">
+                    <a href="#" class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#device_{{device.id}}" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">  
                     <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
-                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
-                    </svg>
+                        {% if device.connected %}
+                            <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
+                        {% else %}
+                            <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
+                        {% endif %}
+                     </svg>
                     {{ device }}
                 </a>
             </li>

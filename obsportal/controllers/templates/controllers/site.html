@@ -6,7 +6,15 @@
 
     <div class="col-8 p-4 m-4 h-50 text-bg-light rounded sticky-top"> 
         <h1> {{site}} </h1>
-        <p>Device Controls here</p>
+        <p>Click on device name to show/hide device controls.</p>
+        {% for device in site.device_site.all %}
+            <div class="collapse" id="device_{{device.id}}">
+            <div class="bg-dark p-4">
+                <h5 class="text-white h4">{{device}}</h5>
+            <span class="text-body-secondary">Toggleable via the navbar brand.</span>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
 </div>
