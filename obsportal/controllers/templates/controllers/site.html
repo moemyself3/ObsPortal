@@ -4,7 +4,7 @@
 {% include 'controllers/navbar.html'%}    
 {% include 'controllers/messages.html' %}
 
-    <div class="col-8 p-4 m-4 h-50 text-bg-light rounded sticky-top"> 
+    <div class="col-sm-8 p-4 mx-auto h-50 text-bg-light rounded sticky-top"> 
         <h1> {{site}} </h1>
         <p>Click on device name to show/hide device controls.</p>
         {% for device in site.device_site.all %}
