@@ -121,7 +121,6 @@ def alpaca_registration_site_transfer(request):
             return HttpResponseRedirect(reverse('devices:site-detail', kwargs={'pk':site[0]}))
 
         for index, device_info in enumerate(selected):
-            print(device_info)
             device_info = ast.literal_eval(device_info)
             device_info = alpaca_discovery_to_form(device_info)
             device_info['site'] = site
@@ -142,13 +141,8 @@ def alpaca_registration_site_transfer(request):
 def save_alpaca_registration(request):
     RegisterDeviceFormset = modelformset_factory(Device, form=RegisterDeviceForm)
     if request.method == "POST":
-        print('####### RegisterDeviceFormset #####')
-        print(RegisterDeviceFormset)
-        print('###### request.POST #########')
-        print(request.POST)
         formset = RegisterDeviceFormset(request.POST, queryset=Device.objects.none())
         if formset.is_valid():
-            print('##### Save formset here #####')
             for form in formset:
                 print(form)
                 form.save()
@@ -159,10 +153,8 @@ def save_alpaca_registration(request):
                 )
             return HttpResponseRedirect(reverse('devices:site-detail', kwargs={'pk':request.POST['form-0-site']}))
         else:
-            print('formset not valid')
             return render(request, 'devices/alpacatransfer.html')
     else:
-        print("SURPRISE SURPRISE")
         return render(request, 'devices/alpacatransfer.html')
 
 # Helper function to translate dicovery dictionary output to form
