@@ -6,7 +6,7 @@ from .device import Device
 #from .focuser import Focuser
 #from .observingconditions import ObservingConditions
 #from .rotator import Rotator
-#from .safteymonitor import SafteyMonitor
+#from .safetymonitor import SafetyMonitor
 from .site import Site
 #from .switch import Switch
 from .telescope import Telescope

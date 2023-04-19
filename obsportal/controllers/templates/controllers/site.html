@@ -11,7 +11,9 @@
             <div class="collapse" id="device_{{device.id}}">
             <div class="bg-dark p-4">
                 <h5 class="text-white h4">{{device}}</h5>
-            <span class="text-body-secondary">Toggleable via the navbar brand.</span>
+                <span class="text-white">{{device.devicetype}}</span>
+                <button class="btn btn-primary">Connect</button>
+
             </div>
         </div>
         {% endfor %}

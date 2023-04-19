@@ -44,7 +44,7 @@ class RegisterDeviceForm(forms.ModelForm):
         widgets = { 
             'site': forms.ChoiceField.widget(attrs={'class':'form-control'}),
             'ip_address': forms.GenericIPAddressField.widget(attrs={'class':'form-control'}),
-            'devicetype': forms.CharField.widget(attrs={'class':'form-control'}),
+            'devicetype': forms.ChoiceField.widget(attrs={'class':'form-control'}),
             'connected': forms.BooleanField.widget(attrs={'class':'form-check-input', 'disabled':'disabled'}),
             'description': forms.CharField.widget(attrs={'class':'form-control'}),
             'driverinfo': forms.CharField.widget(attrs={'class':'form-control'}),
