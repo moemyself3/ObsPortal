@@ -8,6 +8,8 @@
     <link href="{% static 'bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css' %}" rel="stylesheet" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+    <script src="{% static 'htmx-1.9.0/htmx.min.js' %}"></script>
     <title>TOROS Portal</title>
 </head>
 <body>
@@ -22,5 +24,11 @@
     <script>
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))</script>
+
+    <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>
 </body>
 </html>

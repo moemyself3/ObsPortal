@@ -1,0 +1,21 @@
+<div hx-get="{% url "controllers:device" device_id %}"
+    hx-trigger="every 3s"
+    hx-swap="outerHTML">
+    {% csrf_token %}
+    <button class="btn btn-success"
+        id="btn_connect_device_{{device_id}}"
+        hx-put="{% url "controllers:stop" device_id %}"
+        hx-target="#telemetry_device_{{device_id}}"
+        hx-swap="innerHTML"
+        >Disconnect</button>
+
+    <h4> {{device_type}}: {{device_id}}</h4>
+    <p class="text-muted">{% now "c" %}</p>
+
+    <ul>
+        {% for key, value in device.items %}
+            <li>{{ key }}: {{ value }}</li>
+        {%endfor%}
+    </ul>
+</div>
+

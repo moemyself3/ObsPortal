@@ -4,9 +4,6 @@ import time
 
 @shared_task 
 def telescope_demo():
-    #host = device['ip_address']
-    #port = device['port']
-    #print(str(host)+":"+str(port))
     T = Telescope('localhost:32323', 0)
     print(T)
     try:

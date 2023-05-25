@@ -1,0 +1,70 @@
+<div hx-get="{% url "controllers:device" device_id %}"
+    hx-trigger="every 3s"
+    hx-swap="outerHTML">
+    {% csrf_token %}
+    <button class="btn btn-success"
+        id="btn_connect_device_{{device_id}}"
+        hx-put="{% url "controllers:stop" device_id %}"
+        hx-target="#telemetry_device_{{device_id}}"
+        hx-swap="innerHTML"
+        >Disconnect</button>
+
+
+    {% if telescope.tracking %}
+    <button class="btn btn-warning"
+        id="btn_telescope_tracking_{{device_id}}"
+        hx-put="{% url "controllers:device" device_id %}"
+        hx-target="#telemetry_device_{{device_id}}"
+        hx-swap="innerHTML"
+        >End Tracking</button>
+    {%else%}
+    <button class="btn btn-success"
+        id="btn_connect_device_{{device_id}}"
+        hx-put="{% url "controllers:device" device_id %}"
+        hx-target="#telemetry_device_{{device_id}}"
+        hx-swap="innerHTML"
+        >Start Tracking</button>
+    {% endif %}
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Parameter</th>
+            <th scope="col">Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Tracking</th>
+            <td>{{telescope.tracking}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Slewing</th>
+            <td>{{telescope.slewing}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Parked</th>
+            <td>{{telescope.parking}}</td>
+        </tr>
+
+        <tr>
+            <th scope="row">RA</th>
+            <td>{{telescope.ra}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Dec</th>
+            <td>{{telescope.dec}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Alt</th>
+            <td>{{telescope.alt}}</td>
+        </tr>
+       <tr>
+            <th scope="row">Az</th>
+            <td>{{telescope.az}}</td>
+        </tr>
+    </tbody>
+</table>
+
+</div>
+

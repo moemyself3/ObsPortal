@@ -11,11 +11,18 @@
             <div class="collapse" id="device_{{device.id}}">
             <div class="bg-dark p-4">
                 <h5 class="text-white h4">{{device}}</h5>
-                <span class="text-white">{{device.devicetype}}</span>
-                <button class="btn btn-primary">Connect</button>
-
+                <div class="col-8 p-4 m-4 h-50 text-bg-light rounded sticky-top" id="telemetry_device_{{device.id}}">
+                <button class="btn btn-primary"
+                        id="btn_connect_device_{{device_id}}"
+                        hx-get="{% url "controllers:device" device.id %}"
+                        hx-target="#telemetry_device_{{device.id}}"
+                        hx-swap="innerHTML"
+                        >Connect</button>
+                <h4>Not Connected</h4>
+                <p class="text-muted">{% now "c" %}</p>
+                </div>
             </div>
-        </div>
+            </div>
         {% endfor %}
     </div>
 

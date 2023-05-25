@@ -21,16 +21,16 @@
         {% if site %}
         <h4>Devices</h4>
         
-        <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDevices" aria-expanded="false" aria-controls="collapseDevices">
+        <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDevices" aria-expanded="true" aria-controls="collapseDevices">
             Show/Hide 
         </button>
-        <div class="collapse" id="collapseDevices">
+        <div class="collapse show" id="collapseDevices">
             <ul class="nav flex-column nav-tabs">
                 {% for device in site.device_site.all %}
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#device_{{device.id}}" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">  
+                    <a href="#" class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#device_{{device.id}}" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                     <svg class="bi d-inline mx-auto mb-1" width="24" height="24" fill="currentColor">
-                        {% if device.connected %}
+                        {% if device.connected == "True" %}
                             <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb-fill"></use>
                         {% else %}
                             <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>

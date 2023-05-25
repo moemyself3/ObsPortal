@@ -1,0 +1,14 @@
+<div hx-get="{% url "controllers:device" device_id %}"
+    hx-trigger="click"
+    hx-swap="outerHTML">
+    <button class="btn btn-primary"
+        id="btn_connect_device_{{device_id}}"
+        hx-get="{% url "controllers:device" device_id %}"
+        hx-target="#telemetry_device_{{device_id}}"
+        hx-swap="innerHTML"
+        >Connect</button>
+
+    <h4>Not Connected</h4>
+    <p class="text-muted">{% now "c" %}</p>
+
+</div>
